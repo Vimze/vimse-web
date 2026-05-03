@@ -1,0 +1,346 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import DownloadCTA from "../components/DownloadCTA.astro";
+
+const philosophy = [
+  {
+    number: "01",
+    title: "Offline-first",
+    description: "Your app should work regardless of your connection. Vimse stores everything locally and syncs when it can.",
+  },
+  {
+    number: "02",
+    title: "Respect your time",
+    description: "No ads, no push notifications begging you back, no gamification. Open the app, do what you need, close it.",
+  },
+  {
+    number: "03",
+    title: "Privacy by default",
+    description: "Your recipes and shopping lists are personal. We don't read them, analyze them, or sell them.",
+  },
+  {
+    number: "04",
+    title: "Honest software",
+    description: "No dark patterns, no misleading upsells. We tell you exactly what Vimse does and doesn't do.",
+  },
+  {
+    number: "05",
+    title: "Focused scope",
+    description: "We'd rather do two things extremely well than ten things poorly. Recipes and shopping first, then we expand carefully.",
+  },
+  {
+    number: "06",
+    title: "Quality over speed",
+    description: "Every detail matters. Transitions, typography, the feel of checking off an item. Software should feel good to use.",
+  },
+];
+---
+
+<BaseLayout
+  title="About — Vimse"
+  description="Learn about Vimse — why we built it, what we believe in, and how to get in touch."
+>
+  <!-- ═══ Hero ═══ -->
+  <section class="about-hero">
+    <div class="container about-hero-grid">
+      <div class="about-hero-text" data-reveal>
+        <SectionLabel
+          label="About Vimse"
+          title="Built from frustration, made with care"
+          dark
+          titleSize="text-6xl"
+        />
+        <p class="about-hero-body">
+          Vimse started because every app we tried did too much or too little. We wanted something fast, offline, and honest — an app that helps you organize daily life without getting in the way.
+        </p>
+      </div>
+
+      <div class="about-hero-photo" data-reveal>
+        <div class="photo-placeholder">
+          <span class="photo-letter">V</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Story ═══ -->
+  <section class="section-padding">
+    <div class="container story-container">
+      <div class="story-content" data-reveal>
+        <p>
+          We started Vimse with a simple question: why is it so hard to keep track of what to cook and what to buy? Existing apps were either overloaded with features we didn't need, or too basic to be actually useful. We wanted something in between — thoughtful, fast, and designed for how people actually live.
+        </p>
+        <p>
+          The first version was built for ourselves. A place to save recipes we found online, adjust servings on the fly, and send ingredients straight to a shopping list. No social features, no discovery algorithm, no premium tier with hidden essentials. Just a tool that works.
+        </p>
+        <p>
+          We believe software should respect the people who use it. That means no ads, no tracking, no dark patterns. It means working offline, syncing quietly in the background, and getting out of your way. Vimse is built in Norway with these values at its core, and we plan to keep it that way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Philosophy ═══ -->
+  <section class="section-padding bg-grid-texture" style="background-color: var(--color-vimse-surface);">
+    <div class="container">
+      <SectionLabel
+        label="Our philosophy"
+        title="What we believe in"
+        subtitle="Six principles that guide every decision we make."
+        centered
+      />
+
+      <div class="philosophy-grid">
+        {philosophy.map((item, i) => (
+          <div class="philosophy-card" data-reveal data-reveal-delay={String((i % 3) + 1)}>
+            <span class="philosophy-number">{item.number}</span>
+            <h3 class="philosophy-title">{item.title}</h3>
+            <p class="philosophy-desc">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Contact ═══ -->
+  <section class="section-padding">
+    <div class="container contact-container">
+      <div class="contact-card" data-reveal>
+        <div class="contact-circle" aria-hidden="true"></div>
+
+        <span class="contact-label">Get in touch</span>
+        <h2 class="contact-title">Questions, feedback, or just want to say hi?</h2>
+        <p class="contact-body">
+          We'd love to hear from you. Whether you've found a bug, have a feature idea, or just want to share how you use Vimse — drop us a line.
+        </p>
+        <a href="mailto:hello@nesh.no" class="contact-btn">Send us an email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Download CTA ═══ -->
+  <DownloadCTA />
+</BaseLayout>
+
+<style>
+  /* ─── Hero ─── */
+  .about-hero {
+    background: var(--color-vimse-hero);
+    padding: 140px 0 80px;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 30% 50%, rgba(0, 122, 110, 0.06) 0%, transparent 70%);
+  }
+
+  .about-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-hero-body {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 480px;
+  }
+
+  .about-hero-photo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .photo-placeholder {
+    width: 280px;
+    height: 280px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-letter {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 56px;
+    color: var(--color-primary-400);
+  }
+
+  /* ─── Story ─── */
+  .story-container {
+    max-width: 720px;
+  }
+
+  .story-content p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-gray-600);
+    margin-bottom: 24px;
+  }
+
+  .story-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ─── Philosophy ─── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .philosophy-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--color-gray-100);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .philosophy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .philosophy-number {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    color: var(--color-primary-200);
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .philosophy-title {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: 8px;
+  }
+
+  .philosophy-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+  }
+
+  /* ─── Contact ─── */
+  .contact-container {
+    max-width: 720px;
+  }
+
+  .contact-card {
+    background: var(--color-vimse-hero);
+    border-radius: 28px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-circle {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--color-primary-500);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .contact-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary-300);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-title {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    max-width: 440px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 440px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-primary-500);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 32px;
+    border-radius: 14px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 122, 110, 0.25);
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-btn:hover {
+    background: var(--color-primary-700);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 122, 110, 0.35);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 767px) {
+    .about-hero {
+      padding: 120px 0 60px;
+    }
+
+    .about-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .photo-placeholder {
+      width: 200px;
+      height: 200px;
+    }
+
+    .photo-letter {
+      font-size: 44px;
+    }
+
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+      padding: 32px;
+    }
+
+    .contact-title {
+      font-size: 28px;
+    }
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+import StoreBadges from "./StoreBadges.astro";
+---
+
+<section class="download-cta" id="download">
+  <div class="container" style="text-align: center; position: relative; z-index: 1;">
+    <SectionLabel
+      label="Get started"
+      title="Ready to simplify your day?"
+      subtitle="Download Vimse — free, no account required, works offline from the start."
+      centered
+      dark
+      titleSize="text-5xl"
+    />
+    <div style="display: flex; justify-content: center;" data-reveal>
+      <StoreBadges />
+    </div>
+  </div>
+
+  <!-- Decorative blobs -->
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+</section>
+
+<style>
+  .download-cta {
+    background: var(--color-vimse-hero);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-primary-500);
+    opacity: 0.06;
+    top: -100px;
+    right: -100px;
+  }
+
+  .blob-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-primary-400);
+    opacity: 0.04;
+    bottom: -80px;
+    left: -60px;
+  }
+
+  @media (max-width: 767px) {
+    .download-cta {
+      padding: 64px 0;
+    }
+  }
+</style>

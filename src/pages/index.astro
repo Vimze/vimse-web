@@ -1,4 +1,631 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import StoreBadges from "../components/StoreBadges.astro";
+import PhoneMockup from "../components/PhoneMockup.astro";
+import DownloadCTA from "../components/DownloadCTA.astro";
+import IconHome from "../components/icons/IconHome.astro";
+import IconCart from "../components/icons/IconCart.astro";
+import IconPhone from "../components/icons/IconPhone.astro";
+import IconShield from "../components/icons/IconShield.astro";
+import IconCheck from "../components/icons/IconCheck.astro";
+
+import homeScreenshot from "../assets/screenshots/home-light.jpg";
+import recipeScreenshot from "../assets/screenshots/recipe-light.jpg";
+import shoppingScreenshot from "../assets/screenshots/shopping-light.jpg";
+
+const valueProps = [
+  {
+    icon: "home",
+    title: "Offline-first",
+    description: "Works without internet. Syncs seamlessly when you reconnect.",
+  },
+  {
+    icon: "cart",
+    title: "Recipes + shopping",
+    description: "Add recipe ingredients directly to any shopping list with one tap.",
+  },
+  {
+    icon: "phone",
+    title: "Cross-platform",
+    description: "iOS, Android, and web — your data follows you everywhere.",
+  },
+  {
+    icon: "shield",
+    title: "Private & focused",
+    description: "No ads, no tracking, no bloat. Your data stays on your device.",
+  },
+];
+
+const recipeChecklist = [
+  "Ingredients auto-adjust when you change servings",
+  "Step-by-step instructions you can follow hands-free",
+  "Add all ingredients to a shopping list in one tap",
+];
+
+const shoppingTags = [
+  "Check off items",
+  "Drag to reorder",
+  "Archive old lists",
+  "Add from recipes",
+];
+
+const stats = [
+  { number: "100%", label: "Offline capable" },
+  { number: "< 1s", label: "App load time" },
+  { number: "0", label: "Ads or trackers" },
+];
 ---
-<BaseLayout title="Vimse" />
+
+<BaseLayout
+  title="Vimse — Organize your everyday life"
+  description="Vimse helps you organize your everyday life — recipes, shopping lists, and more. Works offline. Free on iOS and Android."
+>
+  <!-- ═══ Hero ═══ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-badge" data-reveal>
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span class="badge-text">Now available on iOS & Android</span>
+        </div>
+
+        <h1 data-reveal>
+          Organize your <em>everyday</em> life
+        </h1>
+
+        <p class="hero-subtitle" data-reveal>
+          Recipes, shopping lists, and everything in between — in one fast, offline-first app that respects your time.
+        </p>
+
+        <div data-reveal>
+          <StoreBadges />
+        </div>
+      </div>
+
+      <div class="hero-phones" data-reveal>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="phone-pair">
+          <PhoneMockup imageSrc={homeScreenshot} alt="Vimse home screen showing shopping lists and recipes" />
+          <PhoneMockup imageSrc={recipeScreenshot} alt="Vimse recipe detail screen" class="phone-offset" />
+        </div>
+
+        <!-- Floating cards -->
+        <div class="floating-card floating-card-1" aria-hidden="true">
+          <span class="floating-icon check-icon">✓</span>
+          <span>Melk</span>
+        </div>
+        <div class="floating-card floating-card-2" aria-hidden="true">
+          <span class="floating-icon recipe-icon">🍽</span>
+          <span>4 porsjoner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Value Props ═══ -->
+  <section class="value-props bg-grid-texture" style="background-color: var(--color-vimse-surface);">
+    <div class="container">
+      <SectionLabel
+        label="Why Vimse?"
+        title="Everything you need, nothing you don't"
+        centered
+      />
+
+      <div class="value-grid">
+        {valueProps.map((prop, i) => (
+          <div class="value-card" data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="value-icon">
+              {prop.icon === "home" && <IconHome size={24} class="icon-svg" />}
+              {prop.icon === "cart" && <IconCart size={24} class="icon-svg" />}
+              {prop.icon === "phone" && <IconPhone size={24} class="icon-svg" />}
+              {prop.icon === "shield" && <IconShield size={24} class="icon-svg" />}
+            </div>
+            <h3 class="value-title">{prop.title}</h3>
+            <p class="value-desc">{prop.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Feature: Recipes ═══ -->
+  <section class="section-padding feature-section">
+    <div class="container feature-grid">
+      <div class="feature-text" data-reveal>
+        <SectionLabel
+          label="Recipes"
+          title="Your recipes, always with you"
+          subtitle="Save your favorite recipes, adjust servings on the fly, and add ingredients straight to your shopping list."
+        />
+
+        <ul class="checklist">
+          {recipeChecklist.map((item) => (
+            <li class="checklist-item">
+              <span class="check-circle">
+                <IconCheck size={14} class="check-icon-svg" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="feature-visual" data-reveal>
+        <div class="feature-glow" aria-hidden="true"></div>
+        <PhoneMockup imageSrc={recipeScreenshot} alt="Recipe detail view in Vimse" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Feature: Shopping (Dark) ═══ -->
+  <section class="section-padding feature-section feature-dark">
+    <div class="container feature-grid feature-grid-reversed">
+      <div class="feature-visual" data-reveal>
+        <div class="feature-glow" aria-hidden="true"></div>
+        <PhoneMockup imageSrc={shoppingScreenshot} alt="Shopping list view in Vimse" />
+      </div>
+
+      <div class="feature-text" data-reveal>
+        <SectionLabel
+          label="Shopping lists"
+          title="Shop smarter, not harder"
+          subtitle="Check off items as you go, reorder with a drag, and archive lists when you're done."
+          dark
+        />
+
+        <div class="tag-pills">
+          {shoppingTags.map((tag) => (
+            <span class="tag-pill">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative blobs -->
+    <div class="dark-blob dark-blob-1" aria-hidden="true"></div>
+    <div class="dark-blob dark-blob-2" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══ Feature: Offline Stats ═══ -->
+  <section class="section-padding stats-section">
+    <div class="container" style="text-align: center;">
+      <SectionLabel
+        label="Built for real life"
+        title="Works everywhere. Even without Wi-Fi."
+        subtitle="Vimse is designed to be fast, private, and always available."
+        centered
+      />
+
+      <div class="stats-row" data-reveal>
+        {stats.map((stat) => (
+          <div class="stat-item">
+            <span class="stat-number">{stat.number}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Download CTA ═══ -->
+  <DownloadCTA />
+</BaseLayout>
+
+<style>
+  /* ─── Hero ─── */
+  .hero {
+    background: var(--color-vimse-hero);
+    min-height: 100vh;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 30% 50%, rgba(0, 122, 110, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 30%, rgba(61, 148, 137, 0.05) 0%, transparent 70%);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-text {
+    max-width: 520px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    padding: 6px 16px 6px 8px;
+    margin-bottom: 28px;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--color-primary-400);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .badge-text {
+    font-size: 13px;
+    color: var(--color-primary-300);
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--color-primary-300);
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+
+  /* Hero phones */
+  .hero-phones {
+    position: relative;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: var(--color-primary-500);
+    opacity: 0.08;
+    border-radius: 50%;
+    filter: blur(80px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .phone-pair {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  :global(.phone-offset) {
+    margin-top: 60px;
+  }
+
+  /* Floating cards */
+  .floating-card {
+    position: absolute;
+    background: #fff;
+    border-radius: 16px;
+    padding: 14px 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+    color: var(--color-gray-800);
+  }
+
+  .floating-card-1 {
+    top: 40px;
+    right: -20px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-card-2 {
+    bottom: 80px;
+    left: -20px;
+    animation: float 6s ease-in-out infinite 2s;
+  }
+
+  .floating-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .check-icon {
+    background: var(--color-primary-50);
+    color: var(--color-primary-500);
+  }
+
+  .recipe-icon {
+    background: #FEF3C7;
+  }
+
+  /* ─── Value Props ─── */
+  .value-props {
+    padding: 100px 0;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .value-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--color-gray-100);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .value-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--color-primary-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--color-primary-500);
+  }
+
+  .value-title {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: 8px;
+  }
+
+  .value-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+  }
+
+  /* ─── Feature Sections ─── */
+  .feature-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .feature-grid-reversed {
+    direction: rtl;
+  }
+
+  .feature-grid-reversed > * {
+    direction: ltr;
+  }
+
+  .feature-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: var(--color-primary-500);
+    opacity: 0.06;
+    border-radius: 50%;
+    filter: blur(60px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Dark feature section */
+  .feature-dark {
+    background: var(--color-vimse-hero);
+  }
+
+  .dark-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .dark-blob-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-primary-500);
+    opacity: 0.06;
+    top: -60px;
+    left: -60px;
+  }
+
+  .dark-blob-2 {
+    width: 200px;
+    height: 200px;
+    background: var(--color-primary-400);
+    opacity: 0.04;
+    bottom: -40px;
+    right: 10%;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-gray-700);
+  }
+
+  .check-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: var(--color-primary-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary-500);
+    margin-top: 1px;
+  }
+
+  /* Tag pills */
+  .tag-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tag-pill {
+    color: var(--color-primary-300);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* ─── Stats ─── */
+  .stats-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+  }
+
+  .stat-number {
+    font-family: var(--font-serif);
+    font-size: 44px;
+    color: var(--color-primary-500);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--color-gray-500);
+    margin-top: 6px;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1023px) {
+    .value-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      padding: 100px 0 60px;
+      min-height: auto;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    h1 {
+      font-size: 38px;
+    }
+
+    .hero-phones {
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone-pair {
+      gap: 0;
+    }
+
+    .phone-pair > :global(:nth-child(2)) {
+      display: none;
+    }
+
+    .floating-card {
+      display: none;
+    }
+
+    .hero-glow {
+      width: 250px;
+      height: 250px;
+    }
+
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .feature-grid-reversed {
+      direction: ltr;
+    }
+
+    .feature-visual {
+      order: -1;
+    }
+
+    .stats-row {
+      gap: 24px;
+    }
+
+    .stat-number {
+      font-size: 36px;
+    }
+  }
+</style>

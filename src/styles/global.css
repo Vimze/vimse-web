@@ -1,7 +1,9 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Fonts loaded via <link> in BaseLayout.astro for better performance */
 
 @theme {
+  /* Primary (Teal) */
   --color-primary-50: #E8F4F3;
   --color-primary-100: #D0EBE8;
   --color-primary-200: #A3D5CF;
@@ -13,6 +15,7 @@
   --color-primary-800: #004A42;
   --color-primary-900: #003630;
 
+  /* Gray (Neutral) */
   --color-gray-50: #FAFAFA;
   --color-gray-100: #F5F5F5;
   --color-gray-200: #EEEEEE;
@@ -24,15 +27,18 @@
   --color-gray-800: #424242;
   --color-gray-900: #212121;
 
+  /* Vimse Specials */
   --color-vimse-hero: #121E26;
   --color-vimse-surface: #F2F2F2;
   --color-vimse-mint: #E0F2F1;
 
+  /* Status */
   --color-success: #159A8A;
   --color-warning: #C4882A;
   --color-error: #C4505A;
   --color-info: #4A8FA8;
 
+  /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -41,13 +47,18 @@
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
 
+  /* Border Radii */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --radius-2xl: 24px;
+  --radius-2xl: 20px;
+  --radius-3xl: 28px;
+  --radius-4xl: 32px;
+  --radius-5xl: 44px;
   --radius-full: 9999px;
 
+  /* Typography Sizes */
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;
@@ -56,11 +67,94 @@
   --text-2xl: 24px;
   --text-3xl: 30px;
   --text-4xl: 36px;
+  --text-5xl: 44px;
+  --text-6xl: 48px;
+  --text-7xl: 56px;
 
+  /* Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.10);
-  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-phone: 0 32px 80px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08);
 
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* Fonts */
+  --font-sans: "Inter", -apple-system, system-ui, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+}
+
+/* ─── Base Styles ─── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-gray-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Keyframe Animations ─── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─── Scroll Reveal ─── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-reveal-delay="1"] { transition-delay: 0.1s; }
+[data-reveal-delay="2"] { transition-delay: 0.2s; }
+[data-reveal-delay="3"] { transition-delay: 0.3s; }
+[data-reveal-delay="4"] { transition-delay: 0.4s; }
+
+/* ─── Utility Patterns ─── */
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.section-padding-sm {
+  padding: 64px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.bg-grid-texture {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 48px;
+  }
+
+  .section-padding-sm {
+    padding: 100px 0;
+  }
 }

@@ -1,0 +1,449 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import PhoneMockup from "../components/PhoneMockup.astro";
+import DownloadCTA from "../components/DownloadCTA.astro";
+import IconChefHat from "../components/icons/IconChefHat.astro";
+import IconCart from "../components/icons/IconCart.astro";
+import IconHome from "../components/icons/IconHome.astro";
+import IconRefresh from "../components/icons/IconRefresh.astro";
+import IconShield from "../components/icons/IconShield.astro";
+import IconCheck from "../components/icons/IconCheck.astro";
+
+import recipeScreenshot from "../assets/screenshots/recipe-light.jpg";
+import shoppingScreenshot from "../assets/screenshots/shopping-light.jpg";
+import homeScreenshot from "../assets/screenshots/home-light.jpg";
+import listsScreenshot from "../assets/screenshots/lists-light.jpg";
+
+const recipeChecklist = [
+  "Adjust servings — quantities recalculate automatically",
+  "Add all ingredients to a shopping list in one tap",
+  "Step-by-step mode for hands-free cooking",
+  "Add photos to remember how dishes should look",
+  "Search and filter across your recipe collection",
+];
+
+const shoppingChecklist = [
+  "Check items off as you shop",
+  "Drag to reorder items",
+  "Progress bar shows how much is left",
+  "Archive completed lists for reference",
+  "Add items manually or from recipes",
+];
+
+const privacyCards = [
+  {
+    icon: "home",
+    title: "Works without internet",
+    description: "Open the app on a plane, in a store basement, or in the countryside. Everything works.",
+  },
+  {
+    icon: "refresh",
+    title: "Syncs when ready",
+    description: "Reconnect and your changes merge automatically. No conflicts, no data loss.",
+  },
+  {
+    icon: "shield",
+    title: "No tracking",
+    description: "We don't track you, sell your data, or show ads. Vimse earns your trust by respecting it.",
+  },
+];
+
+const comingSoon = [
+  {
+    title: "Packing lists",
+    description: "Plan what to bring on trips — with templates for different types of travel.",
+  },
+  {
+    title: "To-do lists",
+    description: "Simple, fast task management for everyday things that need doing.",
+  },
+  {
+    title: "Wish lists",
+    description: "Keep track of things you want — gifts, gear, books, anything.",
+  },
+];
+---
+
+<BaseLayout
+  title="Features — Vimse"
+  description="Explore Vimse's features: recipe management, shopping lists, offline-first sync, and cross-platform support."
+>
+  <!-- ═══ Hero ═══ -->
+  <section class="features-hero">
+    <div class="container" style="text-align: center;">
+      <SectionLabel
+        label="Features"
+        title="Built around how you actually live"
+        subtitle="Vimse keeps things simple. Recipes and shopping lists that work together, work offline, and stay private."
+        centered
+        dark
+        titleSize="text-6xl"
+      />
+    </div>
+  </section>
+
+  <!-- ═══ Recipes Feature ═══ -->
+  <section class="section-padding">
+    <div class="container feature-grid">
+      <div class="feature-text" data-reveal>
+        <div class="feature-icon-container">
+          <IconChefHat size={28} class="feature-icon-svg" />
+        </div>
+        <SectionLabel
+          label="Recipes"
+          title="Your recipes, always with you"
+          subtitle="Save, organize, and cook from your own collection. Vimse makes it easy to keep your favorites at hand."
+        />
+        <ul class="checklist">
+          {recipeChecklist.map((item) => (
+            <li class="checklist-item">
+              <span class="check-circle">
+                <IconCheck size={14} class="check-icon-svg" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="feature-visual" data-reveal>
+        <div class="feature-glow" aria-hidden="true"></div>
+        <PhoneMockup imageSrc={recipeScreenshot} alt="Recipe management in Vimse" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Shopping Feature ═══ -->
+  <section class="section-padding bg-grid-texture" style="background-color: var(--color-vimse-surface);">
+    <div class="container feature-grid feature-grid-reversed">
+      <div class="feature-visual" data-reveal>
+        <div class="feature-glow" aria-hidden="true"></div>
+        <PhoneMockup imageSrc={shoppingScreenshot} alt="Shopping list in Vimse" />
+      </div>
+      <div class="feature-text" data-reveal>
+        <div class="feature-icon-container">
+          <IconCart size={28} class="feature-icon-svg" />
+        </div>
+        <SectionLabel
+          label="Shopping lists"
+          title="Shopping, simplified"
+          subtitle="Create lists, check off items, and keep track of what you need. Integrates seamlessly with your recipes."
+        />
+        <ul class="checklist">
+          {shoppingChecklist.map((item) => (
+            <li class="checklist-item">
+              <span class="check-circle">
+                <IconCheck size={14} class="check-icon-svg" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Offline & Privacy ═══ -->
+  <section class="section-padding privacy-section">
+    <div class="container">
+      <SectionLabel
+        label="Offline & Privacy"
+        title="Your data, your device"
+        subtitle="Vimse works without an internet connection and keeps your information private."
+        centered
+        dark
+      />
+
+      <div class="privacy-grid">
+        {privacyCards.map((card, i) => (
+          <div class="privacy-card" data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="privacy-icon">
+              {card.icon === "home" && <IconHome size={20} />}
+              {card.icon === "refresh" && <IconRefresh size={20} />}
+              {card.icon === "shield" && <IconShield size={20} />}
+            </div>
+            <h3 class="privacy-title">{card.title}</h3>
+            <p class="privacy-desc">{card.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Cross-platform ═══ -->
+  <section class="section-padding">
+    <div class="container" style="text-align: center;">
+      <SectionLabel
+        label="Cross-platform"
+        title="One app, every device"
+        subtitle="Vimse runs on iOS, Android, and the web. Your data follows you everywhere."
+        centered
+      />
+
+      <div class="cross-platform-phones" data-reveal>
+        <div class="side-phone">
+          <PhoneMockup imageSrc={shoppingScreenshot} alt="Vimse on tablet" />
+        </div>
+        <div class="center-phone">
+          <PhoneMockup imageSrc={homeScreenshot} alt="Vimse home screen" />
+        </div>
+        <div class="side-phone">
+          <PhoneMockup imageSrc={recipeScreenshot} alt="Vimse recipe view" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Coming Soon ═══ -->
+  <section class="section-padding bg-grid-texture" style="background-color: var(--color-vimse-surface);">
+    <div class="container">
+      <SectionLabel
+        label="Roadmap"
+        title="Coming soon"
+        subtitle="We're just getting started. Here's what's next for Vimse."
+        centered
+      />
+
+      <div class="coming-grid">
+        {comingSoon.map((item, i) => (
+          <div class="coming-card" data-reveal data-reveal-delay={String(i + 1)}>
+            <span class="coming-badge">COMING SOON</span>
+            <h3 class="coming-title">{item.title}</h3>
+            <p class="coming-desc">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Download CTA ═══ -->
+  <DownloadCTA />
+</BaseLayout>
+
+<style>
+  /* ─── Hero ─── */
+  .features-hero {
+    background: var(--color-vimse-hero);
+    padding: 140px 0 80px;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 122, 110, 0.06) 0%, transparent 70%);
+  }
+
+  /* ─── Feature Sections ─── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .feature-grid-reversed {
+    direction: rtl;
+  }
+
+  .feature-grid-reversed > * {
+    direction: ltr;
+  }
+
+  .feature-icon-container {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--color-primary-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--color-primary-500);
+  }
+
+  .feature-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-glow {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: var(--color-primary-500);
+    opacity: 0.06;
+    border-radius: 50%;
+    filter: blur(60px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-gray-700);
+  }
+
+  .check-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    background: var(--color-primary-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary-500);
+    margin-top: 1px;
+  }
+
+  /* ─── Privacy Section ─── */
+  .privacy-section {
+    background: var(--color-vimse-hero);
+  }
+
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .privacy-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .privacy-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--color-primary-300);
+  }
+
+  .privacy-title {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .privacy-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ─── Cross-platform ─── */
+  .cross-platform-phones {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .side-phone {
+    transform: scale(0.8);
+    transform-origin: bottom center;
+    opacity: 0.85;
+  }
+
+  .center-phone {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── Coming Soon ─── */
+  .coming-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .coming-card {
+    border-radius: 20px;
+    padding: 28px;
+    border: 1.5px dashed var(--color-gray-200);
+    background: var(--color-gray-50);
+  }
+
+  .coming-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+    padding: 3px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 16px;
+  }
+
+  .coming-title {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: 8px;
+  }
+
+  .coming-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 767px) {
+    .features-hero {
+      padding: 120px 0 60px;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .feature-grid-reversed {
+      direction: ltr;
+    }
+
+    .feature-visual {
+      order: -1;
+    }
+
+    .cross-platform-phones {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .side-phone {
+      display: none;
+    }
+
+    .coming-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

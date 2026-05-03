@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Vimse</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-hero {
+      background: var(--hero); padding: 140px 0 80px; position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 50% at 70% 50%, rgba(0,122,110,0.06) 0%, transparent 70%);
+    }
+    .about-hero .container { position: relative; z-index: 1; }
+    .about-hero-grid {
+      display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+    }
+    @media (min-width: 768px) { .about-hero-grid { grid-template-columns: 1.2fr 1fr; gap: 80px; } }
+
+    /* Philosophy cards */
+    .philosophy-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    @media (min-width: 768px) { .philosophy-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .phil-card {
+      background: #fff; border-radius: 20px; padding: 32px;
+      border: 1px solid var(--g100); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s;
+    }
+    .phil-card:hover { transform: translateY(-4px); }
+    .phil-num {
+      font-family: var(--serif); font-size: 40px; color: var(--p200);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .phil-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .phil-card p { font-size: 15px; color: var(--g600); line-height: 1.6; }
+
+    /* Contact section */
+    .contact-card {
+      background: var(--hero); border-radius: 28px; padding: 48px;
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .contact-card::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: var(--p500); opacity: 0.06;
+    }
+    @media (max-width: 767px) { .contact-card { padding: 32px 24px; } }
+  </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel">
+
+function AboutPage() {
+  useReveal();
+
+  return (
+    <>
+      <SiteNav dark={true} current="about" />
+
+      {/* ═══ HERO ═══ */}
+      <section className="about-hero">
+        <div className="container">
+          <div className="about-hero-grid">
+            <div>
+              <p className="section-label" style={{ color: P[300] }}>About Vimse</p>
+              <h1 className="section-title" style={{ color: '#fff', fontSize: 48, marginBottom: 20 }}>
+                Built from frustration,<br/>made with care
+              </h1>
+              <p style={{ fontSize: 18, lineHeight: 1.7, color: 'rgba(255,255,255,0.5)', maxWidth: 480 }}>
+                Vimse started as a personal project — born from the simple annoyance of copying recipe ingredients into a notes app every week.
+              </p>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ width: 280, height: 280, borderRadius: 32, background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.06))', border: '1px solid rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 12 }}>
+                <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 56, color: P[400], opacity: 0.7 }}>V</span>
+                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', fontFamily: 'monospace' }}>founder photo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STORY ═══ */}
+      <section className="section">
+        <div className="container" style={{ maxWidth: 720 }}>
+          <div className="reveal">
+            <p className="section-label">The story</p>
+            <h2 className="section-title" style={{ fontSize: 36, marginBottom: 24 }}>Why does Vimse exist?</h2>
+            <div style={{ fontSize: 17, lineHeight: 1.8, color: G[600], display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <p>
+                We kept running into the same problem: you find a recipe, you want to cook it, and now you need a shopping list. So you copy ingredients by hand into your notes app. Or you try to remember everything at the store. Neither works well.
+              </p>
+              <p>
+                Existing apps were either too complicated, too social, too slow, or required an internet connection to do basic things. We wanted something that just worked — fast, offline, and focused on the two things that actually matter: recipes and shopping lists.
+              </p>
+              <p>
+                So we built Vimse. It's the app we wanted to use ourselves. No ads, no social features, no sign-up walls. Just a clean, fast tool that helps you organize what you eat and what you buy.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ PHILOSOPHY ═══ */}
+      <section className="section section-surface texture-grid">
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: 56 }} className="reveal">
+            <p className="section-label">Philosophy</p>
+            <h2 className="section-title" style={{ maxWidth: 480, margin: '0 auto' }}>What we believe in</h2>
+          </div>
+          <div className="philosophy-grid">
+            {[
+              { num: '01', title: 'Offline-first', desc: 'Your app should work regardless of your connection. Vimse stores everything locally and syncs when it can.' },
+              { num: '02', title: 'Respect your time', desc: 'No ads, no push notifications begging you back, no gamification. Open the app, do what you need, close it.' },
+              { num: '03', title: 'Privacy by default', desc: 'Your recipes and shopping lists are personal. We don\'t read them, analyze them, or sell them.' },
+              { num: '04', title: 'Honest software', desc: 'No dark patterns, no misleading upsells. We tell you exactly what Vimse does and doesn\'t do.' },
+              { num: '05', title: 'Focused scope', desc: 'We\'d rather do two things extremely well than ten things poorly. Recipes and shopping first, then we expand carefully.' },
+              { num: '06', title: 'Quality over speed', desc: 'Every detail matters. Transitions, typography, the feel of checking off an item. Software should feel good to use.' },
+            ].map((p, i) => (
+              <div key={i} className={`phil-card reveal reveal-delay-${i % 3}`}>
+                <div className="phil-num">{p.num}</div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CONTACT ═══ */}
+      <section className="section" id="contact">
+        <div className="container" style={{ maxWidth: 720 }}>
+          <div className="reveal">
+            <div className="contact-card">
+              <p style={{ fontSize: 13, fontWeight: 700, color: P[300], textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>Get in touch</p>
+              <h2 style={{ fontFamily: 'var(--serif)', fontSize: 36, fontWeight: 700, marginBottom: 16, lineHeight: 1.2 }}>
+                Questions, feedback,<br/>or just want to say hi?
+              </h2>
+              <p style={{ fontSize: 16, lineHeight: 1.7, color: 'rgba(255,255,255,0.5)', marginBottom: 32, maxWidth: 440 }}>
+                We're a small team and we read every message. Whether it's a bug report, a feature request, or a recipe recommendation — we'd love to hear from you.
+              </p>
+              <a href="mailto:hello@nesh.no" className="btn-primary" style={{ display: 'inline-flex' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                hello@nesh.no
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <DownloadCTA dark={true} />
+      <SiteFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<AboutPage />);
+</script>
+</body>
+</html>

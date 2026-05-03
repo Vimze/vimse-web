@@ -1,0 +1,248 @@
+---
+import IconMenu from "./icons/IconMenu.astro";
+import IconClose from "./icons/IconClose.astro";
+
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/features", label: "Features" },
+  { href: "/about", label: "About" },
+];
+
+function isActive(href: string): boolean {
+  if (href === "/") return currentPath === "/";
+  return currentPath.startsWith(href);
+}
+---
+
+<nav class="site-nav" id="site-nav">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo">Vimse</a>
+
+    <div class="nav-links" id="nav-links">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={["nav-link", { active: isActive(link.href) }]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="#download" class="nav-cta">Download</a>
+    </div>
+
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <span class="icon-open"><IconMenu size={24} /></span>
+      <span class="icon-close"><IconClose size={24} /></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById("site-nav");
+  const toggle = document.getElementById("nav-toggle");
+  const links = document.getElementById("nav-links");
+
+  // Scroll detection
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if (window.scrollY > 40) {
+          nav?.classList.add("scrolled");
+        } else {
+          nav?.classList.remove("scrolled");
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  toggle?.addEventListener("click", () => {
+    const isOpen = links?.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Close mobile menu on link click
+  links?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      links.classList.remove("open");
+      toggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>
+
+<style>
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+    padding: 16px 0;
+  }
+
+  .site-nav.scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 10px 0;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .scrolled .nav-logo {
+    color: var(--color-primary-500);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #fff;
+  }
+
+  .nav-link.active {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .scrolled .nav-link {
+    color: var(--color-gray-600);
+  }
+
+  .scrolled .nav-link:hover {
+    color: var(--color-primary-500);
+  }
+
+  .scrolled .nav-link.active {
+    color: var(--color-primary-500);
+    font-weight: 600;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-primary-500);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+  }
+
+  .nav-cta:hover {
+    background: var(--color-primary-700);
+    transform: translateY(-1px);
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .scrolled .nav-toggle {
+    color: var(--color-gray-800);
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 16px 24px;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-links .nav-link {
+      color: var(--color-gray-700);
+      padding: 12px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .nav-links .nav-link.active {
+      color: var(--color-primary-500);
+    }
+
+    .nav-links .nav-cta {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .nav-links.open ~ .nav-toggle .icon-open,
+    :global(.nav-links.open ~ .nav-toggle .icon-open) {
+      display: none;
+    }
+
+    /* JS toggles the icons via .open class */
+  }
+</style>

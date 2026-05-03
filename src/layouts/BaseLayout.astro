@@ -1,22 +1,82 @@
 ---
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
 }
 
-const { title = "Vimse" } = Astro.props;
+const {
+  title = "Vimse",
+  description = "Vimse helps you organize your everyday life — recipes, shopping lists, and more. Works offline. Free on iOS and Android.",
+  ogTitle,
+  ogDescription,
+  ogImage = "/images/og-image.png",
+} = Astro.props;
+
+const resolvedOgTitle = ogTitle || title;
+const resolvedOgDescription = ogDescription || description;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121E26" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonicalUrl} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <slot />
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
     <Analytics />
+
+    <!-- Scroll reveal observer -->
+    <script>
+      const revealElements = document.querySelectorAll("[data-reveal]");
+      if (revealElements.length > 0) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+        );
+        revealElements.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>

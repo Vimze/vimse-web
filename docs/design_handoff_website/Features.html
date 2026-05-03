@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features — Vimse</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .features-hero {
+      background: var(--hero); padding: 140px 0 80px; position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .features-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(0,122,110,0.07) 0%, transparent 70%);
+    }
+    .features-hero .container { position: relative; z-index: 1; }
+
+    /* Feature detail sections */
+    .feat-detail {
+      display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+    }
+    @media (min-width: 768px) { .feat-detail { grid-template-columns: 1fr 1fr; gap: 80px; } }
+
+    .feat-card {
+      background: #fff; border-radius: 24px; padding: 36px;
+      border: 1px solid var(--g100); box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    }
+    .feat-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .feat-card p { font-size: 15px; line-height: 1.6; color: var(--g600); }
+
+    .feat-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .feat-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--g700); line-height: 1.5;
+    }
+    .feat-list-dot {
+      width: 6px; height: 6px; border-radius: 3px; background: var(--p400);
+      flex-shrink: 0; margin-top: 8px;
+    }
+
+    /* Coming soon cards */
+    .coming-grid {
+      display: grid; grid-template-columns: 1fr; gap: 16px;
+    }
+    @media (min-width: 640px) { .coming-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .coming-card {
+      border-radius: 20px; padding: 28px; border: 1.5px dashed var(--g200);
+      background: var(--g50);
+    }
+    .coming-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--g800); }
+    .coming-card p { font-size: 14px; color: var(--g500); line-height: 1.5; }
+    .coming-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; color: var(--p600);
+      background: var(--p50); padding: 3px 10px; border-radius: 8px; margin-bottom: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel">
+
+function FeaturesPage() {
+  useReveal();
+
+  const CheckDot = () => <div className="feat-list-dot"></div>;
+
+  return (
+    <>
+      <SiteNav dark={true} current="features" />
+
+      {/* ═══ HERO ═══ */}
+      <section className="features-hero">
+        <div className="container">
+          <p className="section-label" style={{ color: P[300] }}>Features</p>
+          <h1 className="section-title" style={{ color: '#fff', maxWidth: 560, margin: '0 auto 16px', fontSize: 48 }}>
+            Built around how you actually live
+          </h1>
+          <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.45)', margin: '0 auto', maxWidth: 480 }}>
+            Every feature in Vimse solves a real problem — no fluff, no feature bloat. Here's what's inside.
+          </p>
+        </div>
+      </section>
+
+      {/* ═══ RECIPES ═══ */}
+      <section className="section">
+        <div className="container">
+          <div className="feat-detail">
+            <div className="reveal">
+              <FeatureIcon>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={P[500]} strokeWidth="2" strokeLinecap="round"><path d="M6 13.87A4 4 0 013.5 6a4.02 4.02 0 011.25-2.91A4 4 0 0112 2a4 4 0 017.25 1.09A4 4 0 0120.5 6a4 4 0 01-2.5 7.87V21H6v-7.13z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
+              </FeatureIcon>
+              <p className="section-label">Recipes</p>
+              <h2 className="section-title" style={{ fontSize: 36 }}>Your kitchen companion</h2>
+              <p className="section-subtitle" style={{ marginBottom: 24 }}>
+                Store all your recipes in one place. Each recipe has ingredients, step-by-step instructions, and optional photos.
+              </p>
+              <ul className="feat-list">
+                <li><CheckDot /> Adjust servings — quantities recalculate automatically</li>
+                <li><CheckDot /> Add all ingredients to a shopping list in one tap</li>
+                <li><CheckDot /> Step-by-step mode for hands-free cooking</li>
+                <li><CheckDot /> Add photos to remember how dishes should look</li>
+                <li><CheckDot /> Search and filter across your recipe collection</li>
+              </ul>
+            </div>
+            <div className="feature-visual reveal reveal-delay-1">
+              <div className="feature-visual-bg"></div>
+              <PhoneMockup style={{ position: 'relative', zIndex: 2 }}>
+                <MiniRecipeScreen />
+              </PhoneMockup>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ SHOPPING ═══ */}
+      <section className="section section-surface texture-grid">
+        <div className="container">
+          <div className="feat-detail" style={{ direction: 'rtl' }}>
+            <div style={{ direction: 'ltr' }} className="reveal">
+              <FeatureIcon>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={P[500]} strokeWidth="2" strokeLinecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+              </FeatureIcon>
+              <p className="section-label">Shopping lists</p>
+              <h2 className="section-title" style={{ fontSize: 36 }}>Never forget the milk</h2>
+              <p className="section-subtitle" style={{ marginBottom: 24 }}>
+                Create multiple lists, check off items as you shop, and drag to reorder by aisle. Done shopping? Archive the list and start fresh.
+              </p>
+              <ul className="feat-list">
+                <li><CheckDot /> Check items off as you shop</li>
+                <li><CheckDot /> Drag to reorder items</li>
+                <li><CheckDot /> Progress bar shows how much is left</li>
+                <li><CheckDot /> Archive completed lists for reference</li>
+                <li><CheckDot /> Add items manually or from recipes</li>
+              </ul>
+            </div>
+            <div style={{ direction: 'ltr' }} className="feature-visual reveal reveal-delay-1">
+              <div className="feature-visual-bg"></div>
+              <PhoneMockup style={{ position: 'relative', zIndex: 2 }}>
+                <MiniShoppingScreen />
+              </PhoneMockup>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ OFFLINE & PRIVACY ═══ */}
+      <section className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: -100, left: '30%', width: 400, height: 400, borderRadius: '50%', background: P[500], opacity: 0.04, filter: 'blur(80px)' }}/>
+        <div className="container" style={{ position: 'relative' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }} className="reveal">
+            <p className="section-label">Offline & Privacy</p>
+            <h2 className="section-title" style={{ maxWidth: 500, margin: '0 auto' }}>Your data, your device</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
+              Everything is stored locally first. No account required to get started, no data mining, no ads.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+            {[
+              { title: 'Works without internet', desc: 'Open the app on a plane, in a store basement, or in the countryside. Everything works.' },
+              { title: 'Syncs when ready', desc: 'Reconnect and your changes merge automatically. No conflicts, no data loss.' },
+              { title: 'No tracking', desc: "We don't track you, sell your data, or show ads. Vimse earns your trust by respecting it." },
+            ].map((c, i) => (
+              <div key={i} className={`reveal reveal-delay-${i}`} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 20, padding: 32, border: '1px solid rgba(255,255,255,0.06)' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={P[300]} strokeWidth="2" strokeLinecap="round">
+                    {i === 0 && <><path d="M2 20h20M5 20V9l7-6 7 6v11"/><path d="M9 20v-5a3 3 0 016 0v5"/></>}
+                    {i === 1 && <><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></>}
+                    {i === 2 && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>}
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: 8 }}>{c.title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color: 'rgba(255,255,255,0.45)' }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ CROSS-PLATFORM ═══ */}
+      <section className="section">
+        <div className="container" style={{ textAlign: 'center' }}>
+          <div className="reveal">
+            <p className="section-label">Cross-platform</p>
+            <h2 className="section-title" style={{ maxWidth: 500, margin: '0 auto 16px' }}>One app, every device</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto 48px' }}>
+              Start a list on your phone, check it on your tablet, edit a recipe on the web. Vimse goes where you go.
+            </p>
+          </div>
+          <div className="reveal reveal-delay-1" style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+            <PhoneMockup style={{ transform: 'scale(0.8)', transformOrigin: 'bottom center' }}>
+              <MiniShoppingScreen />
+            </PhoneMockup>
+            <PhoneMockup>
+              <MiniHomeScreen />
+            </PhoneMockup>
+            <PhoneMockup style={{ transform: 'scale(0.8)', transformOrigin: 'bottom center' }}>
+              <MiniRecipeScreen />
+            </PhoneMockup>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ COMING SOON ═══ */}
+      <section className="section section-surface">
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: 48 }} className="reveal">
+            <p className="section-label">Roadmap</p>
+            <h2 className="section-title" style={{ maxWidth: 500, margin: '0 auto 16px' }}>More on the way</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
+              Vimse is growing. Here's what's coming next.
+            </p>
+          </div>
+          <div className="coming-grid">
+            {[
+              { title: 'Packing lists', desc: 'Plan what to bring on trips — with templates for different types of travel.' },
+              { title: 'To-do lists', desc: 'Simple, fast task management for everyday things that need doing.' },
+              { title: 'Wish lists', desc: 'Keep track of things you want — gifts, gear, books, anything.' },
+            ].map((c, i) => (
+              <div key={i} className={`coming-card reveal reveal-delay-${i}`}>
+                <div className="coming-badge">Coming soon</div>
+                <h4>{c.title}</h4>
+                <p>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <DownloadCTA dark={true} />
+      <SiteFooter />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<FeaturesPage />);
+</script>
+</body>
+</html>
