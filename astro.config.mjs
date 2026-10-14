@@ -10,10 +10,10 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: "https://nesh.no",
+  site: "https://vimse.app",
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes("/reset-password") })],
   adapter: vercel(),
 });
